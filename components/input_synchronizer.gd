@@ -5,6 +5,7 @@ extends MultiplayerSynchronizer
 @export var move_input = 0
 @export var jumping = false
 
+
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
@@ -13,6 +14,6 @@ func _physics_process(delta: float) -> void:
 		jump.rpc()
 
 
-@rpc("call_local")
+@rpc("reliable", "call_local")
 func jump() -> void:
 	jumping = true

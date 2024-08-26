@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbhhcy7t7ljhs"]
+[gd_scene load_steps=9 format=3 uid="uid://dbhhcy7t7ljhs"]
 
 [ext_resource type="Texture2D" uid="uid://cgo4qinrkmhxi" path="res://assets/Wizardgooseassets/Idle (64x64)-sheet.png" id="1_8qga0"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_07382"]
 [ext_resource type="PackedScene" uid="uid://ofll2xkquma2" path="res://scenes/gun.tscn" id="2_0c17l"]
 [ext_resource type="PackedScene" uid="uid://dre0v4ujb4nh6" path="res://components/input_synchronizer.tscn" id="4_e6va8"]
+[ext_resource type="Script" path="res://components/hurtbox.gd" id="5_nqbmy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wivlr"]
 radius = 36.0555
@@ -12,6 +13,9 @@ radius = 36.0555
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rkd5"]
+size = Vector2(36, 46)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 3
@@ -34,3 +38,12 @@ position = Vector2(38, -65)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_vejhv")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_nqbmy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-36, -4)
+shape = SubResource("RectangleShape2D_6rkd5")

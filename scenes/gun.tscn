@@ -21,7 +21,7 @@ texture = ExtResource("1_hnqlc")
 position = Vector2(66, -26)
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/egg.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/egg.tscn", "res://scenes/explosion.tscn")
 spawn_path = NodePath(".")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

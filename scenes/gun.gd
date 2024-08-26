@@ -1,3 +1,4 @@
+class_name Gun
 extends Node2D
 
 @export var bullet_scene: PackedScene
@@ -18,6 +19,7 @@ func fire() -> void:
 	var bullet_inst = bullet_scene.instantiate()
 	bullet_inst.global_position = marker_2d.global_position
 	bullet_inst.global_rotation = global_rotation
+	#bullet_inst.player = get_multiplayer_authority()
 	bullet_spawner.add_child(bullet_inst, true)
 	bullet_inst.setup.rpc(owner.get_multiplayer_authority())
 	#bullet_inst.set_multiplayer_authority(owner.get_multiplayer_authority())
