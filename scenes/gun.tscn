@@ -1,24 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://ofll2xkquma2"]
+[gd_scene load_steps=8 format=3 uid="uid://ofll2xkquma2"]
 
 [ext_resource type="Texture2D" uid="uid://bb8y2b0x3kcur" path="res://assets/guns/full sized/colt m1911.png" id="1_hnqlc"]
 [ext_resource type="Script" path="res://scenes/gun.gd" id="1_r1gg6"]
 [ext_resource type="PackedScene" uid="uid://cgyf72c6wcr45" path="res://scenes/egg.tscn" id="2_pdkdt"]
+[ext_resource type="AudioStream" uid="uid://b4vlu43cbruvy" path="res://assets/sfx/quack.wav" id="3_7yywn"]
+[ext_resource type="Script" path="res://components/upward_sprite.gd" id="4_jaupx"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ai6ba"]
 properties/0/path = NodePath(".:rotation")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uilv7"]
+properties/0/path = NodePath(".:id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_r1gg6")
 bullet_scene = ExtResource("2_pdkdt")
+fire_sound = ExtResource("3_7yywn")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(32, 0)
+[node name="UpwardSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_hnqlc")
+offset = Vector2(8, 26)
+script = ExtResource("4_jaupx")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(66, -26)
+position = Vector2(42, 0)
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/egg.tscn", "res://scenes/explosion.tscn")
@@ -26,3 +35,6 @@ spawn_path = NodePath(".")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ai6ba")
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_uilv7")

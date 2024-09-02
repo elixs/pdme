@@ -18,7 +18,11 @@ script = ExtResource("1_fmbhi")
 multiplayer_test = true
 test_players = Array[ExtResource("2_xaonh")]([SubResource("Resource_nviqh"), SubResource("Resource_ckjww")])
 
-[node name="PlayerId" type="Label" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="PlayerId" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

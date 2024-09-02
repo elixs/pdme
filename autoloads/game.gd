@@ -15,7 +15,7 @@ signal upnp_completed(error)
 var players: Array[Statics.PlayerData] = []
 var _thread = null
 
-@onready var player_id: Label = $PlayerId
+@onready var player_id: Label = %PlayerId
 
 
 func _ready() -> void:

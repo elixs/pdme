@@ -1,23 +1,14 @@
 extends Hitbox
 
-
 @export var explosion_scene: PackedScene
 
 @export var speed = 300
-@export var player: int:
-	set(value):
-		player = value
-		set_multiplayer_authority(player)
+
 
 
 func _ready() -> void:
-	if is_multiplayer_authority():
+	if multiplayer.is_server():
 		body_entered.connect(_on_body_entered)
-
-
-@rpc("any_peer", "call_local", "reliable")
-func setup(id: int) -> void:
-	set_multiplayer_authority(id)
 
 
 func _physics_process(delta: float) -> void:
@@ -36,5 +27,4 @@ func explosion() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	Debug.log(body.name)
 	explosion()

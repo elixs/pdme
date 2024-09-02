@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Debug="*res://autoloads/debug.gd"
+AudioManager="*res://autoloads/audio_manager.gd"
 Game="*res://autoloads/game.tscn"
 
 [display]
