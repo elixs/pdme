@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm8vsprq0ly17"]
+
+[ext_resource type="Script" path="res://scenes/stats.gd" id="1_rng7r"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_48qg3"]
+properties/0/path = NodePath(".:health")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:max_health")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[node name="Stats" type="Node"]
+script = ExtResource("1_rng7r")
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_48qg3")

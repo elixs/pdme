@@ -1,9 +1,8 @@
-extends Hitbox
+extends Area2D
 
 @export var explosion_scene: PackedScene
 
 @export var speed = 300
-
 
 
 func _ready() -> void:

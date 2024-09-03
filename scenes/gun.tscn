@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ofll2xkquma2"]
+[gd_scene load_steps=9 format=3 uid="uid://ofll2xkquma2"]
 
 [ext_resource type="Texture2D" uid="uid://bb8y2b0x3kcur" path="res://assets/guns/full sized/colt m1911.png" id="1_hnqlc"]
 [ext_resource type="Script" path="res://scenes/gun.gd" id="1_r1gg6"]
@@ -6,15 +6,24 @@
 [ext_resource type="AudioStream" uid="uid://b4vlu43cbruvy" path="res://assets/sfx/quack.wav" id="3_7yywn"]
 [ext_resource type="Script" path="res://components/upward_sprite.gd" id="4_jaupx"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uilv7"]
+properties/0/path = NodePath(".:id")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:ammo")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:max_ammo")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ai6ba"]
 properties/0/path = NodePath(".:rotation")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uilv7"]
-properties/0/path = NodePath(".:id")
-properties/0/spawn = true
-properties/0/replication_mode = 0
+[sub_resource type="LabelSettings" id="LabelSettings_mnlrq"]
+font_size = 70
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_r1gg6")
@@ -33,8 +42,23 @@ position = Vector2(42, 0)
 _spawnable_scenes = PackedStringArray("res://scenes/egg.tscn", "res://scenes/explosion.tscn")
 spawn_path = NodePath(".")
 
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_uilv7")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ai6ba")
 
-[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_uilv7")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -63.0
+offset_right = 41.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+text = "fdsdfsdfs"
+label_settings = SubResource("LabelSettings_mnlrq")

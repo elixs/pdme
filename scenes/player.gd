@@ -15,6 +15,11 @@ var _sleeping := false
 @onready var playback : AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
 @onready var sleep_timer: Timer = $SleepTimer
 @onready var pivot: Node2D = $Pivot
+@onready var stats: Stats = $Stats
+@onready var hud: HUD = $HUD
+@onready var health_bar: ProgressBar = $HealthBar
+@onready var sprite_2d: Sprite2D = $Pivot/Sprite2D
+
 
 
 func _enter_tree() -> void:
@@ -24,6 +29,17 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	setup(id)
 	sleep_timer.timeout.connect(func(): _sleeping = true)
+	var player_data: Statics.PlayerData = Game.get_player(id)
+	if player_data.role == Statics.Role.ROLE_A:
+		sprite_2d.modulate = Color.BLUE
+	else:
+		sprite_2d.modulate = Color.RED
+	stats.health_changed.connect(func(health): hud.health = health)
+	stats.health_changed.connect(func(health): health_bar.value = health)
+	hud.health = stats.health
+	health_bar.value = stats.health
+	hud.visible = is_multiplayer_authority()
+	health_bar.visible = not is_multiplayer_authority()
 
 
 func _physics_process(delta: float) -> void:
@@ -58,7 +74,7 @@ func _physics_process(delta: float) -> void:
 			playback.travel("jump")
 		else:
 			playback.travel("fall")
-	
+
 
 func setup(id: int) -> void:
 	set_multiplayer_authority(id, false)
@@ -87,7 +103,7 @@ func _check_sleep() -> void:
 
 
 func take_damage(damage: int) -> void:
-	notify_take_damage.rpc_id(get_multiplayer_authority(), damage)
+	stats.health -= damage
 
 
 @rpc("any_peer", "call_local", "reliable")

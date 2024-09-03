@@ -1,22 +1,14 @@
-[gd_scene load_steps=46 format=3 uid="uid://dbhhcy7t7ljhs"]
+[gd_scene load_steps=42 format=3 uid="uid://b3g3yk76yr7qs"]
 
-[ext_resource type="Texture2D" uid="uid://cgo4qinrkmhxi" path="res://assets/Wizardgooseassets/Idle (64x64)-sheet.png" id="1_8qga0"]
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_07382"]
-[ext_resource type="PackedScene" uid="uid://ofll2xkquma2" path="res://scenes/gun.tscn" id="2_0c17l"]
-[ext_resource type="PackedScene" uid="uid://dre0v4ujb4nh6" path="res://components/input_synchronizer.tscn" id="4_e6va8"]
-[ext_resource type="Script" path="res://components/hurtbox.gd" id="5_nqbmy"]
-[ext_resource type="Texture2D" uid="uid://bm6gxir8mkwbo" path="res://assets/Wizardgooseassets/Run (64x64)-sheet.png" id="6_oijcg"]
-[ext_resource type="Texture2D" uid="uid://execftgn0ao8" path="res://assets/Wizardgooseassets/Jump (32x32).png" id="7_1sg8b"]
-[ext_resource type="Texture2D" uid="uid://c3cvajtcvh3qb" path="res://assets/Wizardgooseassets/Fall (32x32).png" id="8_awxq4"]
-[ext_resource type="Texture2D" uid="uid://b5paiafmetq6u" path="res://assets/Wizardgooseassets/Lay(64x64).png" id="9_ms2eg"]
-[ext_resource type="PackedScene" uid="uid://bm8vsprq0ly17" path="res://scenes/stats.tscn" id="10_7wsuu"]
-[ext_resource type="PackedScene" uid="uid://dtk8qb2aaqwp4" path="res://ui/hud.tscn" id="11_3i2df"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40knd"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6fn1"]
-bg_color = Color(0.5293, 0.67, 0.201, 1)
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_elwdy"]
+[ext_resource type="Texture2D" uid="uid://cgo4qinrkmhxi" path="res://assets/Wizardgooseassets/Idle (64x64)-sheet.png" id="2_twglv"]
+[ext_resource type="PackedScene" uid="uid://ofll2xkquma2" path="res://scenes/gun.tscn" id="3_el6yd"]
+[ext_resource type="Script" path="res://components/hurtbox.gd" id="4_6gcgp"]
+[ext_resource type="PackedScene" uid="uid://dre0v4ujb4nh6" path="res://components/input_synchronizer.tscn" id="5_v3je1"]
+[ext_resource type="Texture2D" uid="uid://c3cvajtcvh3qb" path="res://assets/Wizardgooseassets/Fall (32x32).png" id="6_msvjh"]
+[ext_resource type="Texture2D" uid="uid://execftgn0ao8" path="res://assets/Wizardgooseassets/Jump (32x32).png" id="7_8qf28"]
+[ext_resource type="Texture2D" uid="uid://b5paiafmetq6u" path="res://assets/Wizardgooseassets/Lay(64x64).png" id="8_61kh5"]
+[ext_resource type="Texture2D" uid="uid://bm6gxir8mkwbo" path="res://assets/Wizardgooseassets/Run (64x64)-sheet.png" id="9_uqlei"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rkd5"]
 size = Vector2(36, 46)
@@ -49,7 +41,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_8qga0")]
+"values": [ExtResource("2_twglv")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -90,7 +82,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_awxq4")]
+"values": [ExtResource("6_msvjh")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -131,7 +123,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_8qga0")]
+"values": [ExtResource("2_twglv")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -172,7 +164,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_1sg8b")]
+"values": [ExtResource("7_8qf28")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -213,7 +205,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_ms2eg")]
+"values": [ExtResource("8_61kh5")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -255,7 +247,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_oijcg")]
+"values": [ExtResource("9_uqlei")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -297,7 +289,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_ms2eg")]
+"values": [ExtResource("8_61kh5")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -404,35 +396,24 @@ graph_offset = Vector2(25, 66)
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 3
 collision_mask = 3
-script = ExtResource("1_07382")
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-z_index = 100
-custom_minimum_size = Vector2(100, 10)
-offset_left = -50.0
-offset_top = 43.0
-offset_right = 50.0
-offset_bottom = 53.0
-theme_override_styles/background = SubResource("StyleBoxFlat_40knd")
-theme_override_styles/fill = SubResource("StyleBoxFlat_d6fn1")
-value = 75.0
-show_percentage = false
+script = ExtResource("1_elwdy")
 
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+modulate = Color(1, 0, 0, 1)
 position = Vector2(5, -14)
 scale = Vector2(3, 3)
-texture = ExtResource("1_8qga0")
+texture = ExtResource("2_twglv")
 hframes = 11
 
-[node name="Gun" parent="Pivot" instance=ExtResource("2_0c17l")]
+[node name="Gun" parent="Pivot" instance=ExtResource("3_el6yd")]
 position = Vector2(50, -100)
 
 [node name="Hurtbox" type="Area2D" parent="Pivot"]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("5_nqbmy")
+script = ExtResource("4_6gcgp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hurtbox"]
 position = Vector2(-36, -4)
@@ -447,7 +428,7 @@ replication_config = SubResource("SceneReplicationConfig_0rg6n")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_vejhv")
 
-[node name="InputSynchronizer" parent="." instance=ExtResource("4_e6va8")]
+[node name="InputSynchronizer" parent="." instance=ExtResource("5_v3je1")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -463,7 +444,3 @@ parameters/BlendTree/TimeSeek/seek_request = 93.76
 wait_time = 5.0
 one_shot = true
 autostart = true
-
-[node name="Stats" parent="." instance=ExtResource("10_7wsuu")]
-
-[node name="HUD" parent="." instance=ExtResource("11_3i2df")]
