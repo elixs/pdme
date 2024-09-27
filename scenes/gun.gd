@@ -19,7 +19,7 @@ signal reload_finished
 @onready var bullet_spawner: MultiplayerSpawner = $BulletSpawner
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
-@onready var ammo_label: Label = $CanvasLayer/MarginContainer/AmmoLabel
+@onready var ammo_label: Label = %AmmoLabel
 
 
 func _ready() -> void:

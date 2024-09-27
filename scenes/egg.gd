@@ -26,4 +26,4 @@ func explosion() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	explosion()
+	explosion.call_deferred()

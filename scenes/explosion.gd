@@ -5,6 +5,14 @@ extends Hitbox
 
 
 func _ready() -> void:
+	var player_scene = Game.get_current_player().local_scene
+	if player_scene:
+		var distance = global_position.distance_to(player_scene.global_position)
+		distance = clamp(distance, 0, 500)
+		distance = (500 - distance) / 10
+		CameraManager.shake(distance)
+	else:
+		CameraManager.shake(20)
 	if not multiplayer.is_server():
 		return
 	body_entered.connect(_on_body_entered)
