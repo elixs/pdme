@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://k38jb2bd3ro"]
+
+[ext_resource type="Texture2D" uid="uid://bbbk1yfjkhgv6" path="res://assets/Eye ball Monster/EyeBall Monster-Sheet.png" id="1_gbwqx"]
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_wx337"]
+[ext_resource type="Script" path="res://components/hurtbox.gd" id="3_nxgdf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e3a8m"]
+radius = 32.9848
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rgba4"]
+radius = 128.25
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_045nf"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4bdhk"]
+radius = 32.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_wx337")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("1_gbwqx")
+region_enabled = true
+region_rect = Rect2(16, 1216, 24, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_e3a8m")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_rgba4")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_045nf")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("3_nxgdf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_4bdhk")

@@ -467,3 +467,6 @@ autostart = true
 [node name="Stats" parent="." instance=ExtResource("10_7wsuu")]
 
 [node name="HUD" parent="." instance=ExtResource("11_3i2df")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false

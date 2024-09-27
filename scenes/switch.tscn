@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://br40lxpikxlht"]
+
+[ext_resource type="Texture2D" uid="uid://ed27k2vo1dn6" path="res://assets/SpaceStationAda/SpaceStation_Tileset.png" id="1_d35c3"]
+[ext_resource type="Script" path="res://scenes/switch.gd" id="1_x3ivc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ukrg"]
+radius = 128.0
+
+[node name="Switch" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_x3ivc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_d35c3")
+region_enabled = true
+region_rect = Rect2(128, 96, 32, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7ukrg")

@@ -13,7 +13,8 @@ func _ready():
 			0,
 			test_player.name,
 			i,
-			test_player.role
+			test_player.role,
+			test_player.color
 		)
 		Game.players.push_back(player)
 	

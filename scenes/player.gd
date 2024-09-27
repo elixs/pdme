@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export var id := 1
@@ -19,6 +20,7 @@ var _sleeping := false
 @onready var hud: HUD = $HUD
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var sprite_2d: Sprite2D = $Pivot/Sprite2D
+@onready var camera_2d: Camera2D = $Camera2D
 
 
 
@@ -30,10 +32,7 @@ func _ready() -> void:
 	setup(id)
 	sleep_timer.timeout.connect(func(): _sleeping = true)
 	var player_data: Statics.PlayerData = Game.get_player(id)
-	if player_data.role == Statics.Role.ROLE_A:
-		sprite_2d.modulate = Color.BLUE
-	else:
-		sprite_2d.modulate = Color.RED
+	sprite_2d.modulate = player_data.color
 	stats.health_changed.connect(func(health): hud.health = health)
 	stats.health_changed.connect(func(health): health_bar.value = health)
 	hud.health = stats.health
@@ -49,8 +48,10 @@ func _physics_process(delta: float) -> void:
 	velocity.x = move_toward(velocity.x, move_input * speed, acceleration * delta)
 	
 	if is_on_floor() and input_synchronizer.jumping:
-		input_synchronizer.jumping = false
 		velocity.y = -jump_speed
+	
+	if input_synchronizer.jumping:
+		input_synchronizer.jumping = false
 	
 	move_and_slide()
 	
@@ -80,6 +81,7 @@ func setup(id: int) -> void:
 	set_multiplayer_authority(id, false)
 	input_synchronizer.set_multiplayer_authority(id)
 	multiplayer_synchronizer.set_multiplayer_authority(id)
+	camera_2d.enabled = is_multiplayer_authority()
 
 
 func _check_sleep() -> void:

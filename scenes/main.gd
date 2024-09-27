@@ -17,3 +17,4 @@ func _ready() -> void:
 		player_inst.global_position = markers.get_child(i).global_position
 		player_inst.id = player_data.id
 		add_child(player_inst)
+		player_data.local_scene = player_inst
