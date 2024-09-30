@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_elwdy"]
 [ext_resource type="Texture2D" uid="uid://cgo4qinrkmhxi" path="res://assets/Wizardgooseassets/Idle (64x64)-sheet.png" id="2_twglv"]
-[ext_resource type="PackedScene" uid="uid://ofll2xkquma2" path="res://scenes/gun.tscn" id="3_el6yd"]
+[ext_resource type="PackedScene" uid="uid://ofll2xkquma2" path="res://scenes/guns/gun.tscn" id="3_el6yd"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="4_6gcgp"]
 [ext_resource type="PackedScene" uid="uid://dre0v4ujb4nh6" path="res://components/input_synchronizer.tscn" id="5_v3je1"]
 [ext_resource type="Texture2D" uid="uid://c3cvajtcvh3qb" path="res://assets/Wizardgooseassets/Fall (32x32).png" id="6_msvjh"]

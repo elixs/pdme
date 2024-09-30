@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cgyf72c6wcr45"]
 
-[ext_resource type="Script" path="res://scenes/egg.gd" id="1_4t635"]
+[ext_resource type="Script" path="res://scenes/bullets/egg.gd" id="1_4t635"]
 [ext_resource type="Texture2D" uid="uid://bc1gmqa2j8i71" path="res://assets/Wizardgooseassets/EggBomb (32x32).png" id="2_g376m"]
 [ext_resource type="PackedScene" uid="uid://bkh5oge3m47jc" path="res://scenes/explosion.tscn" id="2_qwh1l"]
 

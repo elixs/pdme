@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://ofll2xkquma2"]
 
 [ext_resource type="Texture2D" uid="uid://bb8y2b0x3kcur" path="res://assets/guns/full sized/colt m1911.png" id="1_hnqlc"]
-[ext_resource type="Script" path="res://scenes/gun.gd" id="1_r1gg6"]
-[ext_resource type="PackedScene" uid="uid://cgyf72c6wcr45" path="res://scenes/egg.tscn" id="2_pdkdt"]
+[ext_resource type="Script" path="res://scenes/guns/gun.gd" id="1_r1gg6"]
+[ext_resource type="PackedScene" uid="uid://cgyf72c6wcr45" path="res://scenes/bullets/egg.tscn" id="2_pdkdt"]
 [ext_resource type="AudioStream" uid="uid://b4vlu43cbruvy" path="res://assets/sfx/quack.wav" id="3_7yywn"]
 [ext_resource type="Script" path="res://components/upward_sprite.gd" id="4_jaupx"]
 
@@ -39,7 +39,7 @@ script = ExtResource("4_jaupx")
 position = Vector2(42, 0)
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/egg.tscn", "res://scenes/explosion.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/explosion.tscn", "res://scenes/bullets/egg.tscn")
 spawn_path = NodePath(".")
 
 [node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]

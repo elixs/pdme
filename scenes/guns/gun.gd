@@ -13,6 +13,11 @@ signal reload_finished
 		if ammo_label:
 			ammo_label.text = str(ammo)
 @export var max_ammo := 10
+@export var full_auto := false
+@export var fire_rate := 1.0
+
+var _time_of_last_shot: float
+var _fire_pressed := false
 
 @onready var upward_sprite: UpwardSprite = $UpwardSprite
 @onready var marker_2d: Marker2D = $Marker2D
@@ -32,14 +37,23 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if is_multiplayer_authority():
 		global_rotation = global_position.direction_to(get_global_mouse_position()).angle()
-
+		if _fire_pressed and (Time.get_ticks_msec() / 1000.0 - _time_of_last_shot) > fire_rate:
+			_time_of_last_shot = Time.get_ticks_msec() / 1000.0
+			fire.rpc_id(1)
+			fire_fx.rpc()
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority():
 		return
-	if event.is_action_pressed("fire"):
-		fire.rpc_id(1)
-		fire_fx.rpc()
+	if full_auto:
+		if event.is_action_pressed("fire"):
+			_fire_pressed = true
+		if event.is_action_released("fire"):
+			_fire_pressed = false
+	else:
+		if event.is_action_pressed("fire"):
+			fire.rpc_id(1)
+			fire_fx.rpc()
 	if event.is_action_pressed("reload"):
 		reload.rpc_id(1)
 

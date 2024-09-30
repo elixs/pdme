@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ywp4ruit4g5p"]
+
+[ext_resource type="PackedScene" uid="uid://ofll2xkquma2" path="res://scenes/guns/gun.tscn" id="1_htenj"]
+[ext_resource type="Script" path="res://scenes/guns/machine_gun.gd" id="2_e40gm"]
+[ext_resource type="PackedScene" uid="uid://bwnppv8hg0y6m" path="res://scenes/bullets/fast_egg.tscn" id="3_o22p3"]
+[ext_resource type="Texture2D" uid="uid://c5wbsu82sjp4r" path="res://assets/guns/full sized/AR.png" id="3_r01gf"]
+
+[node name="MachineGun" instance=ExtResource("1_htenj")]
+script = ExtResource("2_e40gm")
+bullet_scene = ExtResource("3_o22p3")
+ammo = 50
+max_ammo = 50
+full_auto = true
+fire_rate = 0.05
+
+[node name="UpwardSprite" parent="." index="0"]
+texture = ExtResource("3_r01gf")
+offset = Vector2(8, 8)
+
+[node name="Marker2D" parent="." index="1"]
+position = Vector2(96, 4)
+
+[node name="BulletSpawner" parent="." index="2"]
+_spawnable_scenes = PackedStringArray("res://scenes/explosion.tscn", "res://scenes/bullets/fast_egg.tscn")
