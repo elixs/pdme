@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://di7a0qoxxcvk1"]
+
+[ext_resource type="PackedScene" uid="uid://bj4q8nb1lj0e" path="res://scenes/pickable.tscn" id="1_wdt0s"]
+[ext_resource type="Script" path="res://scenes/health_pickable.gd" id="2_cdkva"]
+
+[node name="HealthPickable" instance=ExtResource("1_wdt0s")]
+script = ExtResource("2_cdkva")
+health = 20
+
+[node name="Sprite2D" parent="." index="0"]
+modulate = Color(0, 1, 0, 1)

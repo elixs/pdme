@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://gcphcadi1sp6"]
+
+[ext_resource type="PackedScene" uid="uid://s2uqknjmhhne" path="res://scenes/supply.tscn" id="1_eujhb"]
+[ext_resource type="PackedScene" uid="uid://di7a0qoxxcvk1" path="res://scenes/health_pickable.tscn" id="2_eijeh"]
+
+[node name="HealthSupply" instance=ExtResource("1_eujhb")]
+item_scene = ExtResource("2_eijeh")
+
+[node name="Icon" parent="." index="3"]
+modulate = Color(0, 1, 0, 1)

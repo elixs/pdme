@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://s2uqknjmhhne"]
+
+[ext_resource type="Texture2D" uid="uid://bbbk1yfjkhgv6" path="res://assets/Eye ball Monster/EyeBall Monster-Sheet.png" id="1_db8rt"]
+[ext_resource type="Script" path="res://scenes/supply.gd" id="1_r0gq6"]
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="2_on2bw"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hlyum"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+
+[node name="Supply" type="Node2D"]
+script = ExtResource("1_r0gq6")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-32, -96, -16, -16)
+
+[node name="Line2D2" type="Line2D" parent="."]
+position = Vector2(8, 8)
+points = PackedVector2Array(24, -104, 8, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, -160)
+scale = Vector2(10, 10)
+texture = ExtResource("1_db8rt")
+region_enabled = true
+region_rect = Rect2(56, 1408, 24, 16)
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_on2bw")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 32)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_hlyum")

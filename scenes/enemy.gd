@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var acceleration := 4000
 @export var gravity := 600
 @export var is_global := false
+@export var blood_fx : PackedScene
 
 var target: Node2D
 
@@ -38,6 +39,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func take_damage(damage: int) -> void:
+	spawn_fx.rpc()
 	queue_free()
 
 func _on_body_entered(body: Node) -> void:
@@ -62,3 +64,12 @@ func set_target_remote(target_path):
 		target = get_node(target_path)
 	else:
 		target = null
+
+
+@rpc("any_peer", "reliable", "call_local")
+func spawn_fx() -> void:
+	if not blood_fx:
+		return
+	var blood_inst = blood_fx.instantiate()
+	blood_inst.global_position = global_position
+	get_parent().add_child(blood_inst)

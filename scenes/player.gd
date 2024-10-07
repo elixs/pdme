@@ -9,8 +9,10 @@ extends CharacterBody2D
 @export var guns : Array[PackedScene]
 @export var gun_index = 0:
 	set(value):
+		var last_gun_index = gun_index
 		gun_index = value
-		_spawn_current_gun()
+		if last_gun_index != gun_index:
+			_spawn_current_gun()
 
 
 var _sleeping := false
@@ -216,13 +218,11 @@ func set_gun(index: int) -> void:
 	if guns.is_empty():
 		return
 	var new_index = (index + guns.size()) %  guns.size()
-	Debug.log(new_index)
-	set_gun_server.rpc_id(1, new_index)
+	set_gun_multicast.rpc(new_index)
 
 
 @rpc("any_peer", "reliable", "call_local")
-func set_gun_server(index: int) -> void:
-	Debug.log(index)
+func set_gun_multicast(index: int) -> void:
 	gun_index = index
 
 
@@ -236,3 +236,12 @@ func _spawn_current_gun() -> void:
 	_gun_scene.id = id
 	_gun_scene.name = "Gun"
 	gun_marker.add_child(_gun_scene)
+
+
+func add_health(value: int) -> void:
+	add_health_server.rpc_id(1, value)
+
+
+@rpc("any_peer", "call_local", "reliable")
+func add_health_server(value: int) -> void:
+	stats.health += value

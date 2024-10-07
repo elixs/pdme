@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnxxsnvewy32k"]
+
+[ext_resource type="Script" path="res://scenes/flag.gd" id="1_51xc3"]
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_stban"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nt4g7"]
+size = Vector2(128, 128)
+
+[node name="Flag" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_51xc3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nt4g7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 1, 1)
+texture = ExtResource("1_stban")

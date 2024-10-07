@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://3630s6rkbn8u"]
+
+[ext_resource type="Script" path="res://scenes/blood.gd" id="1_id2aa"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n0k2y"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 17.31
+direction = Vector3(0, -1, 0)
+spread = 20.0
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 500, 0)
+scale_min = 7.0
+scale_max = 7.0
+color = Color(1, 0, 0, 1)
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.19
+
+[node name="Blood" type="GPUParticles2D"]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_n0k2y")
+one_shot = true
+explosiveness = 0.9
+script = ExtResource("1_id2aa")

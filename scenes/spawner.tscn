@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq1gpa7v4xpf"]
+
+[ext_resource type="Script" path="res://scenes/spawner.gd" id="1_b15gl"]
+
+[node name="Spawner" type="MultiplayerSpawner"]
+spawn_path = NodePath(".")
+script = ExtResource("1_b15gl")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
