@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://ds7okc5w66mpt"]
+[gd_scene load_steps=11 format=4 uid="uid://ds7okc5w66mpt"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_3fekg"]
 [ext_resource type="PackedScene" uid="uid://dbhhcy7t7ljhs" path="res://scenes/player.tscn" id="2_444mo"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://k38jb2bd3ro" path="res://scenes/enemy.tscn" id="6_vsmws"]
 [ext_resource type="PackedScene" uid="uid://cq1gpa7v4xpf" path="res://scenes/spawner.tscn" id="7_5j71n"]
 [ext_resource type="PackedScene" uid="uid://dnxxsnvewy32k" path="res://scenes/flag.tscn" id="7_jsiye"]
+[ext_resource type="Script" path="res://scenes/test_node.gd" id="8_1lto2"]
 [ext_resource type="PackedScene" uid="uid://gcphcadi1sp6" path="res://scenes/health_supply.tscn" id="8_rgyk7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssu2l"]
@@ -257,7 +258,7 @@ _spawnable_scenes = PackedStringArray("res://scenes/enemy.tscn", "res://scenes/b
 scene = ExtResource("6_vsmws")
 
 [node name="Marker2D" parent="EnemySpawner" index="0"]
-position = Vector2(464, 264)
+position = Vector2(472, -328)
 
 [node name="Timer" parent="EnemySpawner" index="1"]
 wait_time = 1.0
@@ -276,6 +277,9 @@ wait_time = 2.0
 
 [node name="Flag" parent="." instance=ExtResource("7_jsiye")]
 position = Vector2(1808, 416)
+
+[node name="TestNode" type="Node" parent="."]
+script = ExtResource("8_1lto2")
 
 [editable path="EnemySpawner"]
 [editable path="Spawner"]

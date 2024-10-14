@@ -11,13 +11,15 @@ var target: Node2D
 
 
 @onready var detection_area: Area2D = $DetectionArea
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
 	if not is_global:
 		if multiplayer.is_server():
 			detection_area.body_entered.connect(_on_body_entered)
 			detection_area.body_exited.connect(_on_body_exited)
-
+	await get_tree().create_timer(0.1).timeout
+	collision_shape_2d.disabled = false
 
 func _physics_process(delta: float) -> void:
 	if is_global:

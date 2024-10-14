@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dbhhcy7t7ljhs"]
+[gd_scene load_steps=52 format=3 uid="uid://dbhhcy7t7ljhs"]
 
 [ext_resource type="Texture2D" uid="uid://cgo4qinrkmhxi" path="res://assets/Wizardgooseassets/Idle (64x64)-sheet.png" id="1_8qga0"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_07382"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://bm8vsprq0ly17" path="res://scenes/stats.tscn" id="10_7wsuu"]
 [ext_resource type="PackedScene" uid="uid://dtk8qb2aaqwp4" path="res://ui/hud.tscn" id="11_3i2df"]
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="12_fjwm0"]
+[ext_resource type="PackedScene" uid="uid://k38jb2bd3ro" path="res://scenes/enemy.tscn" id="14_7arm6"]
+[ext_resource type="Script" path="res://scenes/test_node.gd" id="14_pteph"]
+[ext_resource type="PackedScene" uid="uid://d4au4eofggklj" path="res://scenes/new_spawner.tscn" id="15_8s44u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40knd"]
 bg_color = Color(0, 0, 0, 1)
@@ -635,3 +638,15 @@ max_value = 1.0
 step = 0.01
 fill_mode = 4
 texture_progress = ExtResource("12_fjwm0")
+
+[node name="TestNode" type="Node" parent="."]
+script = ExtResource("14_pteph")
+
+[node name="NewSpawner" parent="." instance=ExtResource("15_8s44u")]
+scene = ExtResource("14_7arm6")
+spawn_zone = Rect2(200, -400, 300, 200)
+
+[node name="MultiplayerSpawner" parent="NewSpawner" index="0"]
+_spawnable_scenes = PackedStringArray("res://scenes/enemy.tscn")
+
+[editable path="NewSpawner"]

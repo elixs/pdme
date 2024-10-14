@@ -35,6 +35,7 @@ var _gun_scene: Gun
 @onready var resurrect_timer: Timer = $ResurrectTimer
 @onready var resurrect_progress_bar: TextureProgressBar = $ResurrectProgressBar
 @onready var gun_marker: Marker2D = $Pivot/GunMarker
+@onready var test_node: Node = $TestNode
 
 
 func _ready() -> void:
@@ -76,7 +77,7 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if not resurrect_timer.is_stopped():
 		resurrect_progress_bar.value = 1 - (resurrect_timer.time_left / resurrect_timer.wait_time)
-	
+
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -126,6 +127,7 @@ func setup(id: int) -> void:
 	input_synchronizer.set_multiplayer_authority(id)
 	multiplayer_synchronizer.set_multiplayer_authority(id)
 	camera_2d.enabled = is_multiplayer_authority()
+	test_node.set_multiplayer_authority(id)
 
 
 func _check_sleep() -> void:
