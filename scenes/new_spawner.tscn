@@ -5,6 +5,7 @@
 [node name="NewSpawner" type="Node2D"]
 script = ExtResource("1_b7h8q")
 spawn_zone = Rect2(117.245, 106.32, 112.09, 157.76)
+enabled = null
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath(".")

@@ -5,9 +5,12 @@ extends Node2D
 @onready var timer: Timer = $Timer
 @export var scene: PackedScene
 @export var spawn_zone: Rect2
+@export var enabled := true
 
 
 func _ready() -> void:
+	if not enabled:
+		return
 	if multiplayer.is_server():
 		if scene:
 			timer.timeout.connect(_on_timer_timeout)

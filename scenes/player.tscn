@@ -2,9 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cgo4qinrkmhxi" path="res://assets/Wizardgooseassets/Idle (64x64)-sheet.png" id="1_8qga0"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_07382"]
-[ext_resource type="PackedScene" uid="uid://ofll2xkquma2" path="res://scenes/guns/gun.tscn" id="2_nc8ur"]
 [ext_resource type="PackedScene" uid="uid://dre0v4ujb4nh6" path="res://components/input_synchronizer.tscn" id="4_e6va8"]
-[ext_resource type="PackedScene" uid="uid://ywp4ruit4g5p" path="res://scenes/guns/machine_gun.tscn" id="4_luv24"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="5_nqbmy"]
 [ext_resource type="Texture2D" uid="uid://bm6gxir8mkwbo" path="res://assets/Wizardgooseassets/Run (64x64)-sheet.png" id="6_oijcg"]
 [ext_resource type="Texture2D" uid="uid://execftgn0ao8" path="res://assets/Wizardgooseassets/Jump (32x32).png" id="7_1sg8b"]
@@ -547,11 +545,16 @@ graph_offset = Vector2(113, -96)
 [sub_resource type="CircleShape2D" id="CircleShape2D_nfwx3"]
 radius = 119.52
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0aev"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_anj02"]
+bg_color = Color(1, 1, 1, 1)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_07382")
-guns = Array[PackedScene]([ExtResource("2_nc8ur"), ExtResource("4_luv24")])
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 z_index = 100
@@ -643,10 +646,35 @@ texture_progress = ExtResource("12_fjwm0")
 script = ExtResource("14_pteph")
 
 [node name="NewSpawner" parent="." instance=ExtResource("15_8s44u")]
+visible = false
 scene = ExtResource("14_7arm6")
 spawn_zone = Rect2(200, -400, 300, 200)
+enabled = false
 
 [node name="MultiplayerSpawner" parent="NewSpawner" index="0"]
 _spawnable_scenes = PackedStringArray("res://scenes/enemy.tscn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SwapProgressBar" type="ProgressBar" parent="CanvasLayer/MarginContainer"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_l0aev")
+theme_override_styles/fill = SubResource("StyleBoxFlat_anj02")
+value = 100.0
+show_percentage = false
+
+[node name="WeaponSwapTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [editable path="NewSpawner"]

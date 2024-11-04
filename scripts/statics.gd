@@ -19,14 +19,16 @@ class PlayerData:
 	var index: int = 0
 	var color: Color
 	var role: Role
+	var weapon: PackedScene
 	var local_scene
 	
-	func _init(new_id: int, new_name: String, new_index: int = 0, new_role: Role = Role.NONE, new_color: Color = Color.WHITE) -> void:
+	func _init(new_id: int, new_name: String, new_index: int = 0, new_role: Role = Role.NONE, new_color: Color = Color.WHITE, new_weapon: PackedScene = null) -> void:
 		id = new_id
 		name = new_name
 		index = new_index
 		role = new_role
 		color = new_color
+		weapon = new_weapon
 	
 	func to_dict() -> Dictionary:
 		return {

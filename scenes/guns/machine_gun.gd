@@ -7,4 +7,4 @@ func _ready() -> void:
 
 func setup(id) -> void:
 	super.setup(id)
-	Debug.log("child setup")
+	#Debug.log("child setup")

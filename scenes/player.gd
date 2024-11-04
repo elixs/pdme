@@ -12,12 +12,12 @@ extends CharacterBody2D
 		var last_gun_index = gun_index
 		gun_index = value
 		if last_gun_index != gun_index:
-			_spawn_current_gun()
-
+			spawn_current_gun()
 
 var _sleeping := false
 var _players_inside: Array[Player] = []
 var _gun_scene: Gun
+var _weapon_spawn_requester: int
 
 @onready var input_synchronizer: InputSynchronizer = $InputSynchronizer
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
@@ -36,6 +36,9 @@ var _gun_scene: Gun
 @onready var resurrect_progress_bar: TextureProgressBar = $ResurrectProgressBar
 @onready var gun_marker: Marker2D = $Pivot/GunMarker
 @onready var test_node: Node = $TestNode
+@onready var weapon_swap_timer: Timer = $WeaponSwapTimer
+@onready var swap_progress_bar: ProgressBar = $CanvasLayer/MarginContainer/SwapProgressBar
+
 
 
 func _ready() -> void:
@@ -48,12 +51,16 @@ func _ready() -> void:
 	health_bar.value = stats.health
 	hud.visible = is_multiplayer_authority()
 	health_bar.visible = not is_multiplayer_authority()
+	swap_progress_bar.visible = is_multiplayer_authority()
 	animation_tree.active = true
 	if is_multiplayer_authority():
 		resurrect_area.body_entered.connect(_on_dead_player_entered)
 		resurrect_area.body_exited.connect(_on_dead_player_exited)
 		resurrect_timer.timeout.connect(_on_resurrect_timeout)
-	_spawn_current_gun()
+	update_guns()
+	weapon_swap_timer.timeout.connect(_on_weapon_swap_timer_timeout)
+	swap_progress_bar.hide()
+
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority():
@@ -77,7 +84,8 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if not resurrect_timer.is_stopped():
 		resurrect_progress_bar.value = 1 - (resurrect_timer.time_left / resurrect_timer.wait_time)
-
+	if not weapon_swap_timer.is_stopped():
+		swap_progress_bar.value = weapon_swap_timer.time_left
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -97,6 +105,10 @@ func _physics_process(delta: float) -> void:
 	
 	if input_synchronizer.jumping:
 		input_synchronizer.jumping = false
+
+	if is_multiplayer_authority():
+		if Input.is_action_just_pressed("swap_request"):
+			request_swap()
 	
 	move_and_slide()
 	
@@ -128,6 +140,7 @@ func setup(id: int) -> void:
 	multiplayer_synchronizer.set_multiplayer_authority(id)
 	camera_2d.enabled = is_multiplayer_authority()
 	test_node.set_multiplayer_authority(id)
+	name = str(id)
 
 
 func _check_sleep() -> void:
@@ -228,7 +241,7 @@ func set_gun_multicast(index: int) -> void:
 	gun_index = index
 
 
-func _spawn_current_gun() -> void:
+func spawn_current_gun() -> void:
 	if _gun_scene:
 		gun_marker.remove_child(_gun_scene)
 		_gun_scene.queue_free()
@@ -247,3 +260,52 @@ func add_health(value: int) -> void:
 @rpc("any_peer", "call_local", "reliable")
 func add_health_server(value: int) -> void:
 	stats.health += value
+
+
+func request_swap() -> void:
+	if get_multiplayer_authority() == _weapon_spawn_requester:
+		return
+	if not weapon_swap_timer.is_stopped():
+		swap_weapons.rpc()
+	else:
+		for player_data in Game.players:
+			if is_instance_valid(player_data.local_scene):
+				player_data.local_scene.request_swap_local.rpc()
+
+
+@rpc("any_peer", "call_local")
+func request_swap_local() -> void:
+	if is_multiplayer_authority():
+		weapon_swap_timer.start()
+		swap_progress_bar.show()
+		swap_progress_bar.max_value = weapon_swap_timer.wait_time
+		_weapon_spawn_requester = multiplayer.get_remote_sender_id()
+
+
+func _on_weapon_swap_timer_timeout() -> void:
+	_weapon_spawn_requester = 0
+	swap_progress_bar.hide()
+
+
+@rpc("any_peer", "call_local")
+func swap_weapons() -> void:
+	var my_player_data = Game.get_player(get_multiplayer_authority())
+	var other_player_data: Statics.PlayerData = null
+	for player_data in Game.players:
+		if player_data.id != get_multiplayer_authority():
+			other_player_data = player_data
+			break
+	if my_player_data.weapon and other_player_data.weapon:
+		var my_weapon = my_player_data.weapon
+		my_player_data.weapon = other_player_data.weapon
+		other_player_data.weapon = my_weapon
+		update_guns()
+		other_player_data.local_scene.update_guns()
+	weapon_swap_timer.stop()
+	_on_weapon_swap_timer_timeout()
+
+
+func update_guns() -> void:
+	var player_data = Game.get_player(id)
+	guns = [player_data.weapon]
+	spawn_current_gun()
