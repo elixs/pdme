@@ -1,11 +1,14 @@
 extends Node2D
 
+@export var music: AudioStream
+
 @export var player_a_scene: PackedScene
 @export var player_b_scene: PackedScene
 @onready var markers: Node2D = $Markers
 
 
 func _ready() -> void:
+	MusicManager.play(music)
 	for i in Game.players.size():
 		var player_data = Game.players[i]
 		var player_inst

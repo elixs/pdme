@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlw4cphlu0clb"]
+
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_0bcw4"]
+[ext_resource type="Texture2D" uid="uid://cgo4qinrkmhxi" path="res://assets/Wizardgooseassets/Idle (64x64)-sheet.png" id="1_0w7dn"]
+[ext_resource type="AudioStream" uid="uid://cc846wlqfuuxj" path="res://assets/music/Smooth Sailing.mp3" id="2_o4ixa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43g2u"]
+atlas = ExtResource("1_0w7dn")
+region = Rect2(8, 8, 48, 48)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0bcw4")
+music = ExtResource("2_o4ixa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Title"
+text = "Pato Disparo Muerte Explosion"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Start" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start"
+
+[node name="Credits" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Credits"
+
+[node name="Settings" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -447.0
+offset_top = 29.0
+offset_right = -223.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.567023
+texture = SubResource("AtlasTexture_43g2u")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -265.0
+offset_right = 496.0
+offset_bottom = -235.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.181007
+text = "this label is in english"
+horizontal_alignment = 1
+vertical_alignment = 1

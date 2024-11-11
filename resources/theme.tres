@@ -1,6 +1,10 @@
-[gd_resource type="Theme" format=3 uid="uid://bwgdrcgopd0s1"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bwgdrcgopd0s1"]
+
+[ext_resource type="FontFile" uid="uid://dmi757tn60lr0" path="res://assets/fonts/80s-retro-future.ttf" id="1_cag30"]
 
 [resource]
+default_font = ExtResource("1_cag30")
+default_font_size = 26
 MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20
@@ -10,3 +14,5 @@ MarginContainerSmall/constants/margin_bottom = 10
 MarginContainerSmall/constants/margin_left = 10
 MarginContainerSmall/constants/margin_right = 10
 MarginContainerSmall/constants/margin_top = 10
+Title/base_type = &"Label"
+Title/font_sizes/font_size = 52

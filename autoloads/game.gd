@@ -19,6 +19,8 @@ var _thread = null
 
 
 func _ready() -> void:
+	load_config()
+	
 	if use_upnp:
 		_thread = Thread.new()
 		_thread.start(_upnp_setup.bind(Statics.PORT))
@@ -124,3 +126,16 @@ func _exit_tree():
 	# Wait for thread finish here to handle game exit while the thread is running.
 	if _thread:
 		_thread.wait_to_finish()
+
+
+
+func load_config() -> void:
+	var config = ConfigFile.new()
+	var err = config.load("user://settings.cfg")
+	if err:
+		return
+	var music = config.get_value("Audio", "Music")
+	var sfx = config.get_value("Audio", "SFX")
+	
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(music))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(sfx))

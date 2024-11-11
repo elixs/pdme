@@ -21,7 +21,6 @@ weapon = ExtResource("4_2unof")
 
 [node name="Game" type="Node"]
 script = ExtResource("1_fmbhi")
-multiplayer_test = true
 test_players = Array[ExtResource("2_xaonh")]([SubResource("Resource_nviqh"), SubResource("Resource_ckjww")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
